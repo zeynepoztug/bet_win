@@ -45,4 +45,22 @@ public class ApiControllerIT {
                 .andReturn();
     }
 
+    @Test
+    void givenBet_MediaTypeSetProperly_thenBadRequest() throws Exception {
+        mockMvc.perform(post(CONTROLLER_POST_URL)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    void givenBet_MediaTypeSetProperly_thenBad() throws Exception {
+        mockMvc.perform(post(CONTROLLER_POST_URL)
+                        .content("{}")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.acme.bet.dto;
 
+import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -8,5 +9,5 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class BetResponse {
-    private Integer win;
+    private BigDecimal win;
 }
