@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.mockito.Mock;
+
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,11 +40,12 @@ public class ApiControllerIT {
     @Test
     void givenBet_MediaTypeSetProperly_thenSuccess() throws Exception {
         when(service.bet(any())).thenReturn(any());
-        mockMvc.perform(post(CONTROLLER_POST_URL)
+        var mvcResult = mockMvc.perform(post(CONTROLLER_POST_URL)
                         .content(CONTROLLER_REQUEST_BODY)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
+        assertTrue(mvcResult.getResponse().getContentAsString().contains("win"));
     }
 
     @Test
@@ -61,6 +64,4 @@ public class ApiControllerIT {
                 .andExpect(status().isBadRequest())
                 .andReturn();
     }
-
-
 }

@@ -1,5 +1,6 @@
 package com.acme.bet.game;
 
+import com.acme.bet.exception.GameArithmeticException;
 import java.math.BigDecimal;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -10,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +26,7 @@ public class GameTest {
     }
 
     @Test
-    public void baseExample() {
+    public void givenProperNumber_ReturnsWin() {
         // * Win depends on chance - = bet * (99 / (100 - number)), as an example if player selected number 50 and bet 40.5, win would be 80,19
         when(GameUtil.getRandom()).thenReturn(49);
         Game game = new Game();
@@ -33,11 +35,18 @@ public class GameTest {
     }
 
     @Test
-    public void baseExampleLoser() {
+    public void givenNumberLessThanRandom_ReturnsZero() {
         when(GameUtil.getRandom()).thenReturn(2);
         Game game = new Game();
         BigDecimal win = game.run(BigDecimal.valueOf(1), 1);
         assertEquals("Loser Example", 0, BigDecimal.ZERO.compareTo(win));
+    }
+
+    @Test
+    public void givenEqualRandomNumberandNumber_CauseArithmeticException() {
+        when(GameUtil.getRandom()).thenReturn(100);
+        Game game = new Game();
+        assertThrows(GameArithmeticException.class, () -> game.run(BigDecimal.valueOf(1), 100));
     }
 
     @AfterClass
