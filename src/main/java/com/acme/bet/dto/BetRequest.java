@@ -19,7 +19,7 @@ public class BetRequest {
     @Max(value = 100, message = "bet must be equal or less than 100")
     private Integer number;
 
-    // @todo bet scope
+    @NotNull
     @DecimalMin(value = "0.01", inclusive = false)
     @Digits(integer = 3, fraction = 2)
     private BigDecimal bet;
