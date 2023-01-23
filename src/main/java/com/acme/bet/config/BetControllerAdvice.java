@@ -1,4 +1,4 @@
-package com.acme.bet.controller;
+package com.acme.bet.config;
 
 import com.acme.bet.dto.ExceptionalResponse;
 import com.acme.bet.exception.GameException;
