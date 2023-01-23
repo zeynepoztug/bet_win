@@ -1,6 +1,6 @@
 package com.acme.bet.game;
 
-import com.acme.bet.exception.GameArithmeticException;
+import com.acme.bet.exception.GameException;
 import java.math.BigDecimal;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -46,7 +46,7 @@ public class GameTest {
     public void givenEqualRandomNumberandNumber_CauseArithmeticException() {
         when(GameUtil.getRandom()).thenReturn(100);
         Game game = new Game();
-        assertThrows(GameArithmeticException.class, () -> game.run(BigDecimal.valueOf(1), 100));
+        assertThrows(GameException.class, () -> game.run(BigDecimal.valueOf(1), 100));
     }
 
     @AfterClass
